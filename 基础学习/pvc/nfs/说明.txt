@@ -1,0 +1,17 @@
+docker建立的nfs服务器
+需要物理机直接装nfs服务，也可以docker
+docker：
+docker run --rm --privileged -p 2049:2049 -p 111:111 -v /nfsroot:/nfsroot -e SHARED_DIRECTORY=/nfsroot itsthenetwork/nfs-server-alpine:latest
+需要
+- host主机remove掉nfs-service和rpcbinding
+- pv.yaml需要修改nfs主机路径，不带前缀
+
+客户端容器
+docker run --rm --name nfs_client -it --privileged alpine:latest /bin/sh
+
+linux下客户端
+mkdir nfs
+mount -t nfs4 ip:/ ./nfs
+
+注意：
+    k8s的节点如果作为nfs的客户端加载远程nfs服务器，本机必须安装nfs-common包

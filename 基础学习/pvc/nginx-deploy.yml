@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    app: nginx-app
+spec:
+  type: NodePort
+  ports:
+  - name: http
+  # 暴露给公网的
+    nodePort: 30080
+    # pods之间通信
+    port: 8000
+    # 容器之间通信
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: nginx-pod
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nginx-pv-volume1
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    # - ReadWriteOnce
+    - ReadWriteMany
+  hostPath:
+    path: "/root/my_volume1"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nginx-pv-volume2
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/root/my_volume2"
+---
+# vol用于定义和描述具体的存储卷，claim为抽象定义，pod直接和pvc对接，pvc可以指定pv，也可以不指定
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pv-claim1
+  labels:
+    app: nginx-app
+spec:
+  accessModes:
+    - ReadWriteMany
+  #   - ReadWriteOnce
+    # - ReadOnlyMany
+  # 可以通过这个指定pv的名字
+  volumeName: nginx-pv-volume1
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pv-claim2
+  labels:
+    app: nginx-app
+spec:
+  accessModes:
+    - ReadWriteMany
+  #   - ReadWriteOnce
+    # - ReadOnlyMany
+  # 可以通过这个指定pv的名字
+  volumeName: nginx-pv-volume2
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels: 
+    app: nginx-app
+spec:
+  volumes:
+    - name: aaa
+      persistentVolumeClaim:
+      # pod直接跟着pvc走
+        claimName: nginx-pv-claim1
+    - name: bbb
+      persistentVolumeClaim:
+      # pod直接跟着pvc走
+        claimName: nginx-pv-claim2
+  containers: 
+    - image: nginx
+      name: nginx-pod
+      ports:
+      - containerPort: 80
+        name: "nginx-server"
+      volumeMounts:
+        # 真实容器内路径
+        - mountPath: /usr/share/nginx/html1/
+          name: aaa
+        # 真实容器内路径
+        - mountPath: /usr/share/nginx/html2/
+          name: bbb

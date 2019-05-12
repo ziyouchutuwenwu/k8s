@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv001
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadOnlyMany
+  nfs:
+    # docker版的nfs服务需要修改前缀
+    # path: /nfsroot/pv001
+    server: 192.168.88.210
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv002
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    # 目录需要提前创建好，否则会报错 
+    path: /nfsroot/pv002
+    server: 192.168.88.210
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv003
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    path: /nfsroot/pv003
+    server: 192.168.88.210

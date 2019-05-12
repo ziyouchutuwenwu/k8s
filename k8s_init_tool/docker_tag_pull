@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+from __future__ import print_function
+
+import os, sys
+
+def install_and_retag(real_img_name, mirror_img_name):
+    cmd = "docker pull %s" % mirror_img_name
+    os.system(cmd)
+
+    cmd = "docker tag %s %s " % (mirror_img_name, real_img_name)
+    os.system(cmd)
+
+    cmd = "docker rmi %s" % mirror_img_name
+    os.system(cmd)
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print('usage', str(sys.argv[0]), 'readl_img_name mirror_img_name')
+    else:
+        real_img_name = sys.argv[1]
+        mirror_img_name = sys.argv[2]
+    
+        install_and_retag(real_img_name, mirror_img_name)

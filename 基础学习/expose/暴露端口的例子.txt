@@ -1,0 +1,21 @@
+nodePort对公网
+port是pod的端口
+targetport是pod内的容器端口
+
+例子
+kubectl create deployment nginx --image=nginx
+kubectl expose deployment nginx --port 8000 --target-port 80 --type NodePort
+kubectl get services
+kubectl scale deployments nginx --replicas=10
+kubectl edit svc/nginx
+
+noport.yaml需要先启动nginx的service才行
+
+测试方法：
+curl ip:port
+
+进入pod测试
+kubectl exec pod名字 -it sh
+
+建议使用busybox
+nc -v ip（或者service name） port，即看到结果

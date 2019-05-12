@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: appvars
+data:
+  apploglevel: info
+  appdatadir: /var/data
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cm-test-pod
+spec:
+  containers:
+  - name: cm-test
+    image: busybox
+    command:
+      - sleep
+      - "360000"
+    env:
+    - name: APPLOGLEVEL
+      valueFrom:
+        configMapKeyRef:
+          name: appvars
+          key: apploglevel
+    - name: APPDATADIR
+      valueFrom:
+        configMapKeyRef:
+          name: appvars
+          key: appdatadir
+  restartPolicy: Never

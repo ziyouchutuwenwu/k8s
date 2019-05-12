@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc001
+spec:
+  accessModes:
+  - ReadWriteMany
+  # 定义具体绑定到哪个pv
+  # volumeName: pv002
+  resources:
+    requests:
+      storage: 1Gi
