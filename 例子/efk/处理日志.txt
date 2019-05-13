@@ -1,6 +1,0 @@
-详细见
-https://www.howtoing.com/how-to-set-up-an-elasticsearch-fluentd-and-kibana-efk-logging-stack-on-kubernetes
-讲的非常的好
-
-唯一和这里不一样的地方，就是作者用的是digitalocean的存储，我用的nfs的，遇到一个问题是
-statefulset里面对应的pvc，没有办法对应到具体的pv，暂无思路
