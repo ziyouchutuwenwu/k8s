@@ -16,9 +16,9 @@ spec:
         - name: nfs-client-provisioner
           image: registry.cn-hangzhou.aliyuncs.com/open-ali/nfs-client-provisioner
           volumeMounts:
-            # 容器内真实路径
             - name: nfs-client-root
-              mountPath: /usr/share/elasticsearch/data
+              # 万恶的这里不是容器内真实路径，这是一个magic value，必须要写这个，否则无法在nfs服务器上自动创建目录
+              mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
               value: fuseim.pri/ifs
