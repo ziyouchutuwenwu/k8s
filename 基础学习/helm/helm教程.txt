@@ -11,8 +11,10 @@ Helm 包含两个组件：Helm 客户端 和 Tiller 服务器。
 https://github.com/helm/helm/releases，手动添加到profile或者
 curl -sSL https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
 
-设置好翻墙以后
-helm init
+和谐的初始化
+helm init --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.13.1 --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+
+注: tiller的版本号和helm一样
 
 然后就可以
 helm search xxx
