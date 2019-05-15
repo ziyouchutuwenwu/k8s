@@ -40,3 +40,6 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 kubectl create deployment nginx --image=nginx
 kubectl scale deployment nginx --replicas=4
 kubectl expose deployment nginx --port 8000 --target-port 80 --type NodePort
+
+参考连接: https://segmentfault.com/a/1190000018741112
+非常感谢上面的文章
