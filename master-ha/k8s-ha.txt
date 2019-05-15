@@ -1,0 +1,42 @@
+haproxy = 192.168.88.33
+
+master1 = 192.168.88.50
+master2 = 192.168.88.51
+master3 = 192.168.88.52
+
+node = 192.168.88.200
+
+master1节点执行
+kubeadm config images pull --config kubeadm-config.yaml
+kubeadm init --config=kubeadm-config.yaml --experimental-upload-certs
+
+看到返回的结果，里面有其他主节点加入集群和worker节点加入集群的方式
+You can now join any number of the control-plane node running the following command on each as root:
+# master节点用以下命令加入集群：
+
+  kubeadm join 192.168.41.232:6443 --token ocb5tz.pv252zn76rl4l3f6 \
+    --discovery-token-ca-cert-hash sha256:141bbeb79bf58d81d551f33ace207c7b19bee1cfd7790112ce26a6a300eee5a2 \
+    --experimental-control-plane --certificate-key 20366c9cdbfdc1435a6f6d616d988d027f2785e34e2df9383f784cf61bab9826
+
+Then you can join any number of worker nodes by running the following on each as root:
+# 工作节点用以下命令加入集群：
+kubeadm join 192.168.41.232:6443 --token ocb5tz.pv252zn76rl4l3f6 \
+    --discovery-token-ca-cert-hash sha256:141bbeb79bf58d81d551f33ace207c7b19bee1cfd7790112ce26a6a300eee5a2 
+
+
+我们分别把其他主节点和子节点一个个加入集群
+
+在所有的主节点上
+mkdir -p $HOME/.kube; sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+在master1上kubectl get nodes，发现都是not ready，然后kubectl describe node master1，发现是网络插件的问题
+
+在所有master节点上安装网络插件
+./docker_tag_pull quay.io/coreos/flannel:v0.11.0-amd64 jmgao1983/flannel:v0.11.0-amd64
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+测试的nginx服务
+kubectl create deployment nginx --image=nginx
+kubectl scale deployment nginx --replicas=4
+kubectl expose deployment nginx --port 8000 --target-port 80 --type NodePort

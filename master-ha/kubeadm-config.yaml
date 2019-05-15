@@ -1,0 +1,7 @@
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: ClusterConfiguration
+kubernetesVersion: v1.14.1 # 指定1.14版本
+controlPlaneEndpoint: 192.168.88.33:6443 # haproxy地址及端口
+imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers # 指定镜像源为阿里源
+networking:
+  podSubnet: 10.244.0.0/16 # 计划使用flannel网络插件，指定pod网段及掩码
