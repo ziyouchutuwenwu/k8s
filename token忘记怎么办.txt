@@ -1,9 +1,0 @@
-忘记token怎么加入k8s集群
-master生成永久有效的token
-kubeadm token create --ttl 0
-
-生成ca证书sha256编码hash值
-openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
-
-子节点加入
-kubeadm join 10.167.11.153:6443 --token ccln7w.4bk9qkr5no7u6y3o --discovery-token-ca-cert-hash sha256:b72bf7d4c665c8aa66ccb5e9e8a3db13503ee94836267a6074ba1547a9ac85d8
