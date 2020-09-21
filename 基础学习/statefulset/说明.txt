@@ -7,7 +7,7 @@ kubectl create -f ./headless_service.yaml
 以后
 
 启动测试容器
-kubectl exec -it busybox /bin/sh
+kubectl exec -it busybox -- /bin/sh
 
 nslookup nginx-service
 可以看到两个ip

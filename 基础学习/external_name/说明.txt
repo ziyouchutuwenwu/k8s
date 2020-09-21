@@ -1,2 +1,0 @@
-kubectl create -f ./xxx以后
-kubectl exec -it 进入调试专用的容器，ping my-service即可看到结果
