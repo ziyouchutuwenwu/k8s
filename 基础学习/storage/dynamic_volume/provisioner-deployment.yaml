@@ -1,8 +1,11 @@
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: nfs-client-provisioner
 spec:
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
   replicas: 1
   strategy:
     type: Recreate
@@ -21,13 +24,15 @@ spec:
               mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
-              value: fuseim.pri/ifs
+              value: mynfs-provisioner
             - name: NFS_SERVER
-              value: 192.168.88.207
+              value: 192.168.88.126
             - name: NFS_PATH
-              value: /es_data
+              # nfs服务器的实际路径,和下面的 volumes 里面的字段必须一致
+              value: /nfs/aaa
       volumes:
         - name: nfs-client-root
           nfs:
-            server: 192.168.88.207
-            path: /es_data
+            # nfs服务器的实际路径
+            server: 192.168.88.126
+            path: /nfs/aaa
