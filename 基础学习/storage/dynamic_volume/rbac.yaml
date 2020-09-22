@@ -20,11 +20,14 @@ rules:
     verbs: ["get", "list", "watch"]
   - apiGroups: [""]
     resources: ["events"]
-    verbs: ["list", "watch", "create", "update", "patch"]
+    verbs: ["watch", "create", "update", "patch"]
   - apiGroups: [""]
-    resources: ["endpoints"]
-    verbs: ["create", "delete", "get", "list", "watch", "patch", "update"]
-
+    resources: ["services", "endpoints"]
+    verbs: ["get"]
+  - apiGroups: ["extensions"]
+    resources: ["podsecuritypolicies"]
+    resourceNames: ["nfs-client-provisioner"]
+    verbs: ["use"]
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
