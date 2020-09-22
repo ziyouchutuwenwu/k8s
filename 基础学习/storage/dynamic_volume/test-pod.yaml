@@ -2,6 +2,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: test-pvc
+  namespace: test
 spec:
   accessModes:
     - ReadWriteMany
@@ -16,6 +17,7 @@ kind: Pod
 apiVersion: v1
 metadata:
   name: test-pod
+  namespace: test
 spec:
   containers:
     - name: test-pod
