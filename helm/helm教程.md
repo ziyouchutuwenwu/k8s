@@ -25,3 +25,11 @@ helm repo add gitlab https://charts.gitlab.io
 helm repo add goharbor https://helm.goharbor.io
 helm repo add elastic https://helm.elastic.co
 ```
+
+## 其他用法
+
+在 namespace 为 logs 的里面 list
+
+```bash
+helm list --all -n logs
+```
