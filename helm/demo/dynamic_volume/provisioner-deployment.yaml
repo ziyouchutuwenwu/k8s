@@ -1,0 +1,39 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nfs-client-provisioner
+  namespace: logs
+spec:
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nfs-client-provisioner
+    spec:
+      serviceAccountName: nfs-client-provisioner
+      containers:
+        - name: nfs-client-provisioner
+          image: registry.cn-hangzhou.aliyuncs.com/open-ali/nfs-client-provisioner
+          volumeMounts:
+            - name: nfs-client-root
+              # 万恶的这里不是容器内真实路径，这是一个magic value，必须要写这个，否则无法在nfs服务器上自动创建目录
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: mynfs-provisioner
+            - name: NFS_SERVER
+              value: 192.168.88.126
+            - name: NFS_PATH
+              # nfs服务器的实际路径,和下面的 volumes 里面的字段必须一致
+              value: /nfs/aaa
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            # nfs服务器的实际路径
+            server: 192.168.88.126
+            path: /nfs/aaa

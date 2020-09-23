@@ -1,0 +1,35 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: test-pvc
+  namespace: logs
+spec:
+  accessModes:
+    - ReadWriteMany
+  # 与 storage-class.yaml 中的 name 一致
+  storageClassName: mynfs-class
+  resources:
+    requests:
+      storage: 1Mi
+
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: test-pod
+  namespace: logs
+spec:
+  containers:
+    - name: test-pod
+      image: busybox
+      command:
+        - sleep
+        - "360000"
+      volumeMounts:
+        - name: nfs-pvc
+          mountPath: "/data"
+  restartPolicy: "Never"
+  volumes:
+    - name: nfs-pvc
+      persistentVolumeClaim:
+        claimName: test-pvc
