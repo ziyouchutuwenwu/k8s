@@ -13,4 +13,15 @@ Helm 是包管理工具，这里的包就是指的 chart。
 
 [这里](https://github.com/helm/helm/releases)下载, 手动添加到 profile
 
-## 具体用法可以 google
+## 具体用法
+
+### 添加 repo
+
+```bash
+helm repo add stable https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+helm repo add google https://kubernetes-charts.storage.googleapis.com
+helm repo add jetstack https://charts.jetstack.io
+helm repo add gitlab https://charts.gitlab.io
+helm repo add goharbor https://helm.goharbor.io
+helm repo add elastic https://helm.elastic.co
+```

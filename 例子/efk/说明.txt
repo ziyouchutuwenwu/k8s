@@ -1,5 +1,0 @@
-详细见
-https://www.howtoing.com/how-to-set-up-an-elasticsearch-fluentd-and-kibana-efk-logging-stack-on-kubernetes
-讲的非常的好
-
-需要先运行基础目录里面的dynamic_volume，再跑这个例子
