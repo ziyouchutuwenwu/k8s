@@ -1,4 +1,0 @@
---kubelet-preferred-address-types这个参数可以指定master访问node的优先顺序，如果服务在海外节点，自建机房，还有云的话，通过这个模式，可以约定，先从哪边开始跑，k8s默认是InternalIP
-
-修改顺序模式例子，以下，不需要改成真实ip
---kubelet-preferred-address-types=Hostname,ExternalIP,InternalIP
