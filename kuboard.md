@@ -28,7 +28,7 @@ docker run -d \
   --name=kuboard \
   -p 7654:80/tcp \
   -p 10081:10081/tcp \
-  -e KUBOARD_ENDPOINT="http://192.168.88.73:7654" \
+  -e KUBOARD_ENDPOINT="http://10.0.2.15:7654" \
   -e KUBOARD_AGENT_SERVER_TCP_PORT="10081" \
   swr.cn-east-2.myhuaweicloud.com/kuboard/kuboard:v3
 ```
