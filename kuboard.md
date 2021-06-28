@@ -29,4 +29,6 @@ admin
 Kuboard123
 ```
 
-## ingress 测试
+## 具体资料
+
+参考官方文档
