@@ -3,9 +3,15 @@
 ## 安装
 
 ```sh
-curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
-echo deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main > /etc/apt/sources.list.d/kubernetes.list
+curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg
+echo deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main > /etc/apt/sources.list.d/kubernetes.list
 apt update; apt install kubelet kubeadm kubectl -y
+```
+
+标记禁止升级
+
+```sh
+apt-mark hold kubelet kubeadm kubectl
 ```
 
 ## 注意
