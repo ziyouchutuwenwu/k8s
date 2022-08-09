@@ -17,5 +17,5 @@ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outfor
 ### 子节点加入
 
 ```bash
-sudo kubeadm join 10.167.11.153:6443 --token 新token --discovery-token-ca-cert-hash sha256:hash值
+sudo kubeadm join 192.168.56.11:6443 --token onl54r.ijjcoc7w6ejc0h4x --discovery-token-ca-cert-hash sha256:hash值
 ```
