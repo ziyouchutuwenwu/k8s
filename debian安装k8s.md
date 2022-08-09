@@ -16,7 +16,7 @@ apt-mark hold kubelet kubeadm kubectl
 
 ## 注意
 
-安装 docker 后，containerd 会默认安装，默认禁用 cri，需要注释掉，否则会报错
+安装 docker 后，`containerd.io` 会默认安装，默认禁用 cri，需要注释掉，否则会报错
 
 ```sh
 sudo vim /etc/containerd/config.toml
