@@ -46,10 +46,14 @@ http://192.168.56.99:8081/haproxy/stats
 
 #### 初始化
 
-192.168.56.99 为虚拟 ip
+192.168.56.99 为虚拟 ip，6444 为 haproxy 里面指定的端口
 
 ```sh
-kubeadm init --apiserver-advertise-address=192.168.56.99 --control-plane-endpoint=192.168.56.99 --image-repository registry.aliyuncs.com/google_containers --service-cidr=10.96.0.0/16 --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all --kubernetes-version v1.24.3 --cri-socket unix:///var/run/cri-dockerd.sock
+kubeadm init --apiserver-advertise-address=192.168.56.11 --control-plane-endpoint=192.168.56.99 --image-repository registry.aliyuncs.com/google_containers --service-cidr=10.96.0.0/16 --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all --kubernetes-version v1.24.3 --cri-socket unix:///var/run/cri-dockerd.sock
+```
+
+```sh
+kubeadm init --apiserver-advertise-address=192.168.56.99 --apiserver-bind-port=6444 --control-plane-endpoint=192.168.56.99 --image-repository registry.aliyuncs.com/google_containers --service-cidr=10.96.0.0/16 --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all --kubernetes-version v1.24.3 --cri-socket unix:///var/run/cri-dockerd.sock
 ```
 
 #### 同步证书
@@ -79,4 +83,8 @@ done
 kubeadm join 192.168.56.99:6443 --token wf5kse.etcohviss324zrse --discovery-token-ca-cert-hash sha256:dcd5c4462b4828255c67e8fe7308e1d5e11cfac7876a97f3d67950c46613fdff --cri-socket unix:///var/run/cri-dockerd.sock --control-plane
 ```
 
+### 重置
+
+```sh
 kubeadm reset --cri-socket unix:///var/run/cri-dockerd.sock
+```
