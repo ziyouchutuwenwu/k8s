@@ -58,23 +58,46 @@ kubeadm init --apiserver-advertise-address=192.168.56.99 --apiserver-bind-port=6
 
 #### 同步证书
 
-```sh
-#!/bin/bash
+```python
+import argparse
+import os
+import sys
 
-USER=root
-CONTROL_PLANE_IPS="k8s2 k8s3"
-for host in ${CONTROL_PLANE_IPS}; do
-    ssh "${USER}"@$host "mkdir -p /etc/kubernetes/pki/etcd"
-    scp /etc/kubernetes/pki/ca.crt "${USER}"@$host:/etc/kubernetes/pki/
-    scp /etc/kubernetes/pki/ca.key "${USER}"@$host:/etc/kubernetes/pki/
-    scp /etc/kubernetes/pki/sa.key "${USER}"@$host:/etc/kubernetes/pki/
-    scp /etc/kubernetes/pki/sa.pub "${USER}"@$host:/etc/kubernetes/pki/
-    scp /etc/kubernetes/pki/front-proxy-ca.crt "${USER}"@$host:/etc/kubernetes/pki/
-    scp /etc/kubernetes/pki/front-proxy-ca.key "${USER}"@$host:/etc/kubernetes/pki/
-    scp /etc/kubernetes/pki/etcd/ca.crt "${USER}"@$host:/etc/kubernetes/pki/etcd/
-    # Quote this line if you are using external etcd
-    scp /etc/kubernetes/pki/etcd/ca.key "${USER}"@$host:/etc/kubernetes/pki/etcd/
-done
+def sync_cert_to_host(ip, username, password):
+    cmd = 'sshpass -p %s ssh %s@%s "mkdir -p /etc/kubernetes/pki/etcd"' % (password, username, ip)
+    os.system(cmd)
+    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/ca.crt %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    os.system(cmd)
+    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/ca.key %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    os.system(cmd)
+    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/sa.key %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    os.system(cmd)
+    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/sa.pub %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    os.system(cmd)
+    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/front-proxy-ca.crt %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    os.system(cmd)
+    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/front-proxy-ca.key %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    os.system(cmd)
+    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/etcd/ca.crt %s@%s:/etc/kubernetes/pki/etcd/' % (password, username, ip)
+    os.system(cmd)
+    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/etcd/ca.key %s@%s:/etc/kubernetes/pki/etcd/' % (password, username, ip)
+    os.system(cmd)
+
+if __name__ == '__main__':
+    script_name = str(sys.argv[0])
+    if len(sys.argv) != 2:
+        print("用法: %s --hosts=192.168.56.22:root:root123456,192.168.56.33:root:root123456" % script_name)
+        exit(-1)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--hosts")
+    args = parser.parse_args()
+    hosts = args.hosts.split(",")
+    for host in hosts:
+        ip = host.split(":")[0]
+        username = host.split(":")[1]
+        password = host.split(":")[-1]
+        sync_cert_to_host(ip, username, password)
 ```
 
 ### 其他 master 节点
