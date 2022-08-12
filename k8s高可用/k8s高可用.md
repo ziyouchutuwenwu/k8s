@@ -54,35 +54,37 @@ kubeadm init --apiserver-advertise-address 192.168.56.99 --apiserver-bind-port 6
 
 #### 同步证书
 
+如果是免密登陆，密码部分置空即可
+
 ```python
 import argparse
 import os
 import sys
 
 def sync_cert_to_host(ip, username, password):
-    cmd = 'sshpass -p %s ssh %s@%s "mkdir -p /etc/kubernetes/pki/etcd"' % (password, username, ip)
+    cmd = 'sshpass -p "%s" ssh %s@%s "mkdir -p /etc/kubernetes/pki/etcd"' % (password, username, ip)
     os.system(cmd)
-    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/ca.crt %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    cmd = 'sshpass -p "%s" scp /etc/kubernetes/pki/ca.crt %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
     os.system(cmd)
-    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/ca.key %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    cmd = 'sshpass -p "%s" scp /etc/kubernetes/pki/ca.key %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
     os.system(cmd)
-    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/sa.key %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    cmd = 'sshpass -p "%s" scp /etc/kubernetes/pki/sa.key %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
     os.system(cmd)
-    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/sa.pub %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    cmd = 'sshpass -p "%s" scp /etc/kubernetes/pki/sa.pub %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
     os.system(cmd)
-    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/front-proxy-ca.crt %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    cmd = 'sshpass -p "%s" scp /etc/kubernetes/pki/front-proxy-ca.crt %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
     os.system(cmd)
-    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/front-proxy-ca.key %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
+    cmd = 'sshpass -p "%s" scp /etc/kubernetes/pki/front-proxy-ca.key %s@%s:/etc/kubernetes/pki/' % (password, username, ip)
     os.system(cmd)
-    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/etcd/ca.crt %s@%s:/etc/kubernetes/pki/etcd/' % (password, username, ip)
+    cmd = 'sshpass -p "%s" scp /etc/kubernetes/pki/etcd/ca.crt %s@%s:/etc/kubernetes/pki/etcd/' % (password, username, ip)
     os.system(cmd)
-    cmd = 'sshpass -p %s scp /etc/kubernetes/pki/etcd/ca.key %s@%s:/etc/kubernetes/pki/etcd/' % (password, username, ip)
+    cmd = 'sshpass -p "%s" scp /etc/kubernetes/pki/etcd/ca.key %s@%s:/etc/kubernetes/pki/etcd/' % (password, username, ip)
     os.system(cmd)
 
 if __name__ == '__main__':
     script_name = str(sys.argv[0])
     if len(sys.argv) != 2:
-        print("用法: %s --hosts=192.168.56.22:root:root123456,192.168.56.33:root:root123456" % script_name)
+        print("用法: %s --hosts=192.168.56.22:root:root123456,192.168.56.33:root:" % script_name)
         exit(-1)
 
     parser = argparse.ArgumentParser()
