@@ -24,7 +24,7 @@ def sync_cert_to_host(ip, username, password):
     os.system(cmd)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     script_name = str(sys.argv[0])
     if len(sys.argv) != 2:
         print("用法: %s --hosts=192.168.56.22:root:root123456,192.168.56.33:root:" % script_name)
