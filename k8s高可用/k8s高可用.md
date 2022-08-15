@@ -31,6 +31,29 @@ apt install -y keepalived
 vim /etc/keepalived/keepalived.conf
 ```
 
+```conf
+global_defs {
+    router_id lvs1
+}
+vrrp_instance vrrp1 {
+    # 两台主机都设为 backup 非抢占模式
+    state BACKUP
+    # vrrp实例绑定的接口，用于发送VRRP包，根据自己的机器改
+    interface enp0s8
+    virtual_router_id 51
+    priority 150
+    nopreempt
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 123456
+    }
+    virtual_ipaddress {
+        192.168.56.99 dev enp0s8 label enp0s8:0
+    }
+}
+```
+
 ### 配置 haproxy
 
 haproxy 不是必需的
