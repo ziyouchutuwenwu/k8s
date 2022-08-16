@@ -1,19 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: aaa
+  name: nginx-deployment
 spec:
   selector:
     matchLabels:
-      run: my-deploy1
+      # 定义 Deployment 关联的 Pod 的标签
+      app: demo1
   replicas: 3
   template:
+    # Pod的模板
     metadata:
       labels:
-        run: my-deploy1
+        # Pod的标签
+        app: demo1
     spec:
       containers:
-        - name: my-deploy
+        - name: nginx
           image: nginx
           ports:
             - containerPort: 80
