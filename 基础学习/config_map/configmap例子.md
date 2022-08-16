@@ -11,6 +11,6 @@ kubectl delete -f ./configmap-test-pod.yaml
 
 ```bash
 kubectl get pod
-kubectl exec pod名 -it -- sh
+kubectl exec configmap-test-pod -it -- sh
 env 查看变量
 ```
