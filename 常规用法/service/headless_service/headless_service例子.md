@@ -57,3 +57,10 @@ nslookup ddd
 ```
 
 可以看到两个 ip
+
+### 模拟失败
+
+```bash
+kubectl delete sts nginx-sts --cascade=false
+kubectl delete pod nginx-sts-0
+```
