@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-httpd
+  name: aaa
 spec:
   selector:
     matchLabels:
-      run: my-httpd
+      run: my-deploy1
   replicas: 3
   template:
     metadata:
       labels:
-        run: my-httpd
+        run: my-deploy1
     spec:
       containers:
-        - name: my-httpd
+        - name: my-deploy
           image: httpd
           ports:
             - containerPort: 80

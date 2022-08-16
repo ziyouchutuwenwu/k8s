@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: bbb
+spec:
+  type: NodePort
+  selector:
+    run: my-deploy1
+  ports:
+    - name: http1
+      port: 8000
+      protocol: TCP
+      targetPort: 80
+      nodePort: 32580
+    - name: http2
+      port: 8100
+      protocol: TCP
+      targetPort: 80
+      nodePort: 32581

@@ -1,0 +1,15 @@
+# 用于网络和端口测试
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  labels:
+    name: busybox
+    role: master
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command:
+        - sleep
+        - "360000"

@@ -1,4 +1,4 @@
-# 暴露端口
+# node_port 例子
 
 ## 说明
 
@@ -24,20 +24,10 @@
 kubectl apply -f ./http-deploy.yaml
 ```
 
-### 测试方法
-
-```bash
-curl ip:port
-```
-
 ### 进入 pod 测试
 
 ```bash
-kubectl exec pod 名字 -it -- sh
-```
-
-### 建议使用 busybox
-
-```bash
-nc -v ip（或者 service name） port，即看到结果
+kubectl exec busybox -it -- sh
+nc -vz service_name port
+nc -vz ip port
 ```

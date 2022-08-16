@@ -1,6 +1,6 @@
-# 用法
+# external_name 例子
 
-## 调试
+## 步骤
 
 ### 启动这个 service
 
@@ -14,7 +14,7 @@ kubectl get service
 ## 启动一个 busybox 的 pod
 
 ```bash
-kubectl create -f ../debug/busybox.yaml
+kubectl create -f busybox.yaml
 kubectl exec busybox -it -- sh
 ping my-service 即可看到结果
 ```
