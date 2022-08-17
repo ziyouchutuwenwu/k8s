@@ -18,12 +18,33 @@ Helm 是包管理工具，这里的包就是指的 chart。
 ### 添加 repo
 
 ```bash
-helm repo add stable https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
-helm repo add google https://kubernetes-charts.storage.googleapis.com
+helm repo add stable https://charts.ost.ai
 helm repo add jetstack https://charts.jetstack.io
 helm repo add gitlab https://charts.gitlab.io
 helm repo add goharbor https://helm.goharbor.io
 helm repo add elastic https://helm.elastic.co
+
+helm repo add stable http://mirror.azure.cn/kubernetes/charts/
+```
+
+### 查看
+
+```sh
+helm repo list
+helm repo remove xxx
+```
+
+### 更新
+
+```sh
+helm repo update
+```
+
+### 搜索
+
+```sh
+helm search repo prometheus-operator
+helm install prometheus stable/prometheus-operator
 ```
 
 ## 其他用法
