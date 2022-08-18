@@ -22,6 +22,14 @@ kubectl debug -it configmap-test-pod --image=busybox:1.28.4 --share-processes --
 
 ### 用 debug 版 pod
 
+busybox 可以用来调试一些网络相关的
+
 ```sh
 kubectl create -f ./busybox.yaml
+```
+
+alpine 可以放 go 程序调试
+
+```sh
+kubectl create -f ./alpine.yaml
 ```

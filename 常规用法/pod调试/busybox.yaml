@@ -6,7 +6,6 @@ metadata:
   name: busybox
   labels:
     name: busybox
-    role: master
 spec:
   containers:
     - name: busybox
