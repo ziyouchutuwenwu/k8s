@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: bbb
+spec:
+  type: ClusterIP
+  selector:
+    run: my-deploy1
+  ports:
+    - name: abc
+      port: 8200
+      protocol: TCP
+      targetPort: 80

@@ -4,7 +4,7 @@
 
 ### clusterip
 
-自动分配给集群内部用的 ip
+自动分配给集群内部用的 ip, 如果对外暴露，需要通过 nodeport 或者 ingress
 
 ### headless service
 

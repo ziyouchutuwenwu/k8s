@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aaa
+spec:
+  selector:
+    matchLabels:
+      run: my-deploy1
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        run: my-deploy1
+    spec:
+      containers:
+        - name: my-deploy
+          image: nginx
+          ports:
+            - containerPort: 80
