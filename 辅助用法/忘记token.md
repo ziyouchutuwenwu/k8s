@@ -1,6 +1,6 @@
-# token 部分
+# 忘记 token
 
-## 忘记 token 怎么加入 k8s 集群
+加入以后，原来的节点不受影响
 
 ### 列出 token
 
@@ -25,5 +25,3 @@ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outfor
 ```bash
 sudo kubeadm join 192.168.56.11:6443 --token onl54r.ijjcoc7w6ejc0h4x --discovery-token-ca-cert-hash sha256:hash值
 ```
-
-加入以后，原来的节点不受影响
