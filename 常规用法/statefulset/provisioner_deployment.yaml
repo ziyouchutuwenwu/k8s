@@ -4,36 +4,38 @@ metadata:
   name: nfs-client-provisioner
   namespace: test
 spec:
-  selector:
-    matchLabels:
-      app: nfs-client-provisioner
   replicas: 1
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
   template:
     metadata:
       labels:
         app: nfs-client-provisioner
     spec:
+      # 这里和 rbac 里面设置一致
       serviceAccountName: nfs-client-provisioner
       containers:
         - name: nfs-client-provisioner
           image: registry.cn-hangzhou.aliyuncs.com/open-ali/nfs-client-provisioner
           volumeMounts:
             - name: nfs-client-root
-              # 万恶的这里不是容器内真实路径，这是一个magic value，必须要写这个，否则无法在nfs服务器上自动创建目录
+              # 必须要写这个，否则无法在nfs服务器上自动创建目录
               mountPath: /persistentvolumes
           env:
+            # 和 storage class里面的对应
             - name: PROVISIONER_NAME
               value: mynfs-provisioner
             - name: NFS_SERVER
-              value: 192.168.88.126
+              value: 192.168.56.1
             - name: NFS_PATH
               # nfs服务器的实际路径,和下面的 volumes 里面的字段必须一致
-              value: /nfs/aaa
+              value: /mnt/nfs
       volumes:
         - name: nfs-client-root
           nfs:
             # nfs服务器的实际路径
-            server: 192.168.88.126
-            path: /nfs/aaa
+            server: 192.168.56.1
+            path: /mnt/nfs

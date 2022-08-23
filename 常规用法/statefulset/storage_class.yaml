@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: mynfs-class
+# 自定义的 provisioner
+# Deployment 里面的 PROVISIONER_NAME 字段值
+provisioner: mynfs-provisioner
+parameters:
+  # 这里为true,表示pv删除后，会自动归档，不会删除文件
+  archiveOnDelete: "true"

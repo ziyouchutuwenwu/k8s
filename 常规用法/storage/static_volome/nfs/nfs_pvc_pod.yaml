@@ -4,8 +4,10 @@ metadata:
   name: nfs-pod
 spec:
   volumes:
+    # 暴露出来的，和 containers 的 volumeMounts 对应
     - name: volume1
       persistentVolumeClaim:
+        # 和 pvc 里面的一致
         claimName: demo-pvc
   containers:
     - name: demo-container

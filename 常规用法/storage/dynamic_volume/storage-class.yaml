@@ -1,6 +1,0 @@
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: mynfs-class
-# 自定义的 provisioner，动态卷最重要的部分
-provisioner: mynfs-provisioner
