@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-demo
+data:
+  # 变量在这里
+  aaa: this is aaa var
+  bbb: this is var bbb

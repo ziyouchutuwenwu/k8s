@@ -3,14 +3,14 @@
 ## 测试
 
 ```bash
-kubectl create -f ./configmap-test-pod.yaml
-kubectl delete -f ./configmap-test-pod.yaml
+kubectl create -f ./configmap_demo.yaml
+kubectl create -f ./configmap_pod_demo.yaml
 ```
 
 ## 调试
 
 ```bash
 kubectl get pod
-kubectl exec configmap-test-pod -it -- sh
+kubectl exec configmap-pod-demo -it -- sh
 env 查看变量
 ```

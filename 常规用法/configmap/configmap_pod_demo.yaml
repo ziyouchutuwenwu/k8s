@@ -1,17 +1,7 @@
 apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: demo-config-map
-data:
-  # 变量在这里
-  aaa: this is aaa var
-  bbb: this is var bbb
-
----
-apiVersion: v1
 kind: Pod
 metadata:
-  name: configmap-test-pod
+  name: configmap-pod-demo
 spec:
   containers:
     - name: configmap-test
@@ -24,11 +14,11 @@ spec:
         - name: DEMO_VAR_AAA
           valueFrom:
             configMapKeyRef:
-              name: demo-config-map
+              name: configmap-demo
               key: aaa
         - name: DEMO_VAR_BBB
           valueFrom:
             configMapKeyRef:
-              name: demo-config-map
+              name: configmap-demo
               key: bbb
   restartPolicy: Never
