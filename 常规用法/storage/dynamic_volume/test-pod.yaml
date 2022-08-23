@@ -21,7 +21,7 @@ metadata:
 spec:
   containers:
     - name: test-pod
-      image: busybox
+      image: busybox:1.28.4
       command:
         - sleep
         - "360000"

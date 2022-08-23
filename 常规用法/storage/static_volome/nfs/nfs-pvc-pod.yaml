@@ -9,7 +9,7 @@ spec:
         claimName: demo-pvc
   containers:
     - name: demo-container
-      image: busybox
+      image: busybox:1.28.4
       # imagePullPolicy: IfNotPresent
       command:
         - sleep

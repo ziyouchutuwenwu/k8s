@@ -15,7 +15,7 @@ metadata:
 spec:
   containers:
     - name: configmap-test
-      image: busybox
+      image: busybox:1.28.4
       command:
         - sleep
         - "360000"
