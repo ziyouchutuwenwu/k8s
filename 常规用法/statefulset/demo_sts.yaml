@@ -29,12 +29,9 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: www
-        annotations:
-          # 这里是 storage class 的 name
-          volume.beta.kubernetes.io/storage-class: "mynfs-class"
       spec:
-        accessModes: ["ReadWriteOnce"]
-        # storageClassName: slow
+        accessModes: ["ReadWriteMany"]
+        storageClassName: "mynfs-class"
         resources:
           requests:
             storage: 1Gi

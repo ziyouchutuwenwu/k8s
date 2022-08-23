@@ -9,7 +9,7 @@ spec:
     - ReadOnlyMany
   nfs:
     path: "/nfs/pv_read_only_many"
-    server: 192.168.88.126
+    server: 192.168.56.1
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -24,7 +24,7 @@ spec:
     # 目录需要提前创建好，否则会报错
     # 多个客户端读写
     path: "/nfs/pv_read_write_many"
-    server: 192.168.88.126
+    server: 192.168.56.1
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -38,4 +38,4 @@ spec:
   persistentVolumeReclaimPolicy: Recycle
   nfs:
     path: "/nfs/pv_read_write_once"
-    server: 192.168.88.126
+    server: 192.168.56.1
