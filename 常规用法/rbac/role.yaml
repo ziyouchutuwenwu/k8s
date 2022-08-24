@@ -1,0 +1,6 @@
+# 定义一个名为 example-sa 的 ServiceAccount
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: mynamespace
+  name: example-sa
