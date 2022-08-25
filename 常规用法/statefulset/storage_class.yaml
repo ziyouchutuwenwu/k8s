@@ -6,5 +6,5 @@ metadata:
 # Deployment 里面的 PROVISIONER_NAME 字段值
 provisioner: mynfs-provisioner
 parameters:
-  # 这里为true,表示pv删除后，会自动归档，不会删除文件
-  archiveOnDelete: "true"
+  # 如果不指定路径，出来的就是随机路径
+  pathPattern: "${.PVC.namespace}/${.PVC.name}"
