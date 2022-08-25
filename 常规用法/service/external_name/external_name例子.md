@@ -5,7 +5,7 @@
 ### 启动这个 service
 
 ```bash
-kubectl create -f ./external-name.yaml
+kubectl create -f ./external_name.yaml
 kubectl get service
 ```
 

@@ -21,7 +21,8 @@
 ## 例子
 
 ```bash
-kubectl apply -f ./http-deploy.yaml
+kubectl apply -f ./http_deploy.yaml
+kubectl apply -f ./nodeport_service.yaml
 ```
 
 ### 进入 pod 测试

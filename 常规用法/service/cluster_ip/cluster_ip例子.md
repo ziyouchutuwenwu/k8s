@@ -7,8 +7,8 @@
 ### 启动这个 service
 
 ```bash
-kubectl create -f ./http-deploy.yaml
-kubectl create -f ./clusterip-service
+kubectl create -f ./http_deploy.yaml
+kubectl create -f ./clusterip_service
 ```
 
 ### 查看

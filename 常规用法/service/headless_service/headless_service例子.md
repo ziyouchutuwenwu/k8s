@@ -5,8 +5,8 @@
 ### deployment 测试
 
 ```bash
-kubectl create -f ./nginx-deploy.yaml
-kubectl create -f ./headless-service.yaml
+kubectl create -f ./nginx_deploy.yaml
+kubectl create -f ./headless_svc.yaml
 ```
 
 查看 service 对应的 endpoints
@@ -33,8 +33,8 @@ nslookup ddd
 ### statefulset 测试
 
 ```bash
-kubectl create -f ./nginx-statefulset.yaml
-kubectl create -f ./headless-service.yaml
+kubectl create -f ./nginx_sts.yaml
+kubectl create -f ./headless_svc.yaml
 ```
 
 查看 service 对应的 endpoints
