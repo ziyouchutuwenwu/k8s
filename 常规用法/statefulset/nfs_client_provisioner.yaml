@@ -19,7 +19,8 @@ spec:
       serviceAccountName: nfs-client-rbac-user
       containers:
         - name: nfs-client-provisioner
-          image: quay.io/external_storage/nfs-client-provisioner:latest
+          # 这个image不需要selfLink
+          image: registry.cn-beijing.aliyuncs.com/pylixm/nfs-subdir-external-provisioner:v4.0.0
           volumeMounts:
             - name: nfs-client-root
               # 必须要写这个，否则无法在nfs服务器上自动创建目录
