@@ -1,3 +1,0 @@
-[submodule "k8s_init_tool/py_mods"]
-	path = k8s_init_tool/py_mods
-	url = https://github.com/ziyouchutuwenwu/py_mods
