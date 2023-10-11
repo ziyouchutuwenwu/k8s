@@ -1,6 +1,8 @@
 # cluster_ip 例子
 
-对外暴露服务参考 ingress
+## 说明
+
+自动分配给集群内部用的 ip, 如果对外暴露，需要通过 nodeport 或者 ingress
 
 ## 步骤
 

@@ -26,10 +26,12 @@ busybox 可以用来调试一些网络相关的
 
 ```sh
 kubectl create -f ./busybox.yaml
+kubectl exec busybox -it -- sh
 ```
 
 alpine 可以放 go 程序调试
 
 ```sh
 kubectl create -f ./alpine.yaml
+kubectl exec alpine -it -- sh
 ```

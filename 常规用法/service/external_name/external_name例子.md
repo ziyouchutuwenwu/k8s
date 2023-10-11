@@ -1,5 +1,9 @@
 # external_name 例子
 
+## 说明
+
+external name 类型的 Service，其实是在 kube-dns 里为你添加了一条 cname 记录
+
 ## 步骤
 
 ### 启动这个 service

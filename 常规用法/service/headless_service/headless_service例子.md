@@ -1,5 +1,13 @@
 # headless_service 例子
 
+## 说明
+
+- 该服务不会分配 cluster ip，也不通过 kube-proxy 做反向代理和负载均衡。
+
+- 而是通过 dns 提供稳定的网络 id 来访问，dns 会将 headless service 的后端 (endpoints) 直接解析为 pod id 列表
+
+- 主要供 statefulset 使用
+
 ## 测试
 
 ### deployment 测试
